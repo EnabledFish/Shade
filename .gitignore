@@ -1,0 +1,10 @@
+# Ide
+/**/.idea/
+/**/.vscode/
+
+# Cargo
+/**/target/
+/**/Cargo.lock
+
+# Shade
+/Build/

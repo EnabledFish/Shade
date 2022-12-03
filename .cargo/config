@@ -1,0 +1,2 @@
+[alias]
+helper = "run --bin shade-helper --"

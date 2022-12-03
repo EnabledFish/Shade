@@ -1,0 +1,77 @@
+use std::path::PathBuf;
+use std::str::FromStr;
+
+use clap::{Arg, ArgMatches, Command};
+
+use crate::image::filesystem::fat::create_image_fat;
+use crate::image::filesystem::Filesystem;
+
+pub fn command_image_create() -> Command {
+    Command::new("create")
+        .about("Create an image file from a folder.")
+        .arg(
+            Arg::new("FROM_FOLDER")
+                .help("The source folder path.")
+                .required(true)
+        )
+        .arg(
+            Arg::new("TO_FILE")
+                .help("The generated image file path.")
+                .required(true)
+        )
+        .arg(
+            Arg::new("SECTOR_COUNT")
+                .help("The count of sectors. (512)")
+        )
+        .arg(
+            Arg::new("SECTOR_SIZE")
+                .help("The size of each sectors. (512)")
+        )
+        .arg(
+            Arg::new("FILESYSTEM")
+                .help("The filesystem of the generated image. (FAT)")
+        )
+}
+
+pub fn process_image_create(matches: &ArgMatches) {
+    let from_folder = matches.get_one::<String>("FROM_FOLDER").unwrap();
+    let to_file = matches.get_one::<String>("TO_FILE").unwrap();
+    let default_sector = String::from("512");
+    let sector_size = matches.get_one::<String>("SECTOR_SIZE")
+        .unwrap_or(&default_sector);
+    let sector_count = matches.get_one::<String>("SECTOR_COUNT")
+        .unwrap_or(&default_sector);
+    let default_filesystem_name = String::from("FAT");
+    let filesystem_name = matches.get_one::<String>("FILESYSTEM")
+        .unwrap_or(&default_filesystem_name);
+
+    println!("Creating one image from source folder: \"{}\".", from_folder);
+    println!("The count of the sectors: {}.", sector_count);
+    println!("The size of each sectors: {}.", sector_size);
+    let sector_count = usize::from_str(sector_count.as_str()).unwrap();
+    let sector_size = usize::from_str(sector_size.as_str()).unwrap();
+    println!("The size of the total image: {}.", sector_count * sector_size);
+
+    println!("The filesystem of the image: {}.", filesystem_name);
+    let filesystem = match filesystem_name.to_lowercase().as_str() {
+        "fat" => Filesystem::Fat,
+        _ => {
+            panic!("Illegal filesystem name.")
+        }
+    };
+
+    image_create(&from_folder.into(), &to_file.into(), sector_size, sector_count, filesystem);
+    println!("Created image file: \"{}\".", to_file);
+}
+
+pub fn image_create(
+    from_folder: &PathBuf,
+    to_file: &PathBuf,
+    sector_size: usize,
+    sector_count: usize,
+    filesystem: Filesystem,
+) {
+    match filesystem {
+        Filesystem::Fat => create_image_fat(from_folder, to_file, sector_size, sector_count)
+    }
+}
