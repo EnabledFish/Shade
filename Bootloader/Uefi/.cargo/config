@@ -1,2 +1,5 @@
+[alias]
+x86_64 = "build --target x86_64-unknown-uefi"
+
 [unstable]
 build-std = ["core", "alloc"]

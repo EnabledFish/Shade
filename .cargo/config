@@ -1,2 +1,5 @@
 [alias]
 helper = "run --bin shade-helper --"
+create-image-from-image-source = "helper image create ./Build/ImageSource ./Build/Image.img"
+build-bootloader-uefi-x86_64 = "helper build bootloader uefi x86_64"
+run-image-qemu-uefi-x86_64 = "helper run qemu uefi x86_64"

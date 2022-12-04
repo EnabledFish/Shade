@@ -5,7 +5,7 @@ use std::path::PathBuf;
 use fatfs::{Dir, FileSystem, FormatVolumeOptions, FsOptions, StdIoWrapper, Write};
 use mbrman::{BOOT_INACTIVE, CHS, MBR, MBRPartitionEntry};
 
-pub fn create_image_fat(
+pub fn image_create_fat(
     from_folder: &PathBuf,
     to_file: &PathBuf,
     sector_size: usize,

@@ -3,8 +3,8 @@
 /**/.vscode/
 
 # Cargo
-/**/target/
-/**/Cargo.lock
+/target/
+/Cargo.lock
 
 # Shade
 /Build/

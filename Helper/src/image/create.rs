@@ -3,7 +3,7 @@ use std::str::FromStr;
 
 use clap::{Arg, ArgMatches, Command};
 
-use crate::image::filesystem::fat::create_image_fat;
+use crate::image::filesystem::fat::image_create_fat;
 use crate::image::filesystem::Filesystem;
 
 pub fn command_image_create() -> Command {
@@ -29,7 +29,7 @@ pub fn command_image_create() -> Command {
         )
         .arg(
             Arg::new("FILESYSTEM")
-                .help("The filesystem of the generated image. (FAT)")
+                .help("The filesystem of the generated image. (Fat)")
         )
 }
 
@@ -41,7 +41,7 @@ pub fn process_image_create(matches: &ArgMatches) {
         .unwrap_or(&default_sector);
     let sector_count = matches.get_one::<String>("SECTOR_COUNT")
         .unwrap_or(&default_sector);
-    let default_filesystem_name = String::from("FAT");
+    let default_filesystem_name = String::from("Fat");
     let filesystem_name = matches.get_one::<String>("FILESYSTEM")
         .unwrap_or(&default_filesystem_name);
 
@@ -52,13 +52,8 @@ pub fn process_image_create(matches: &ArgMatches) {
     let sector_size = usize::from_str(sector_size.as_str()).unwrap();
     println!("The size of the total image: {}.", sector_count * sector_size);
 
-    println!("The filesystem of the image: {}.", filesystem_name);
-    let filesystem = match filesystem_name.to_lowercase().as_str() {
-        "fat" => Filesystem::Fat,
-        _ => {
-            panic!("Illegal filesystem name.")
-        }
-    };
+    let filesystem = Filesystem::from_str(filesystem_name).unwrap();
+    println!("The filesystem of the image: {}.", filesystem.as_str());
 
     image_create(&from_folder.into(), &to_file.into(), sector_size, sector_count, filesystem);
     println!("Created image file: \"{}\".", to_file);
@@ -72,6 +67,6 @@ pub fn image_create(
     filesystem: Filesystem,
 ) {
     match filesystem {
-        Filesystem::Fat => create_image_fat(from_folder, to_file, sector_size, sector_count)
+        Filesystem::Fat => image_create_fat(from_folder, to_file, sector_size, sector_count)
     }
 }
