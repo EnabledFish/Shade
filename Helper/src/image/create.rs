@@ -21,29 +21,33 @@ pub fn command_image_create() -> Command {
         )
         .arg(
             Arg::new("SECTOR_COUNT")
-                .help("The count of sectors. (512)")
+                .help("The count of sectors.")
+                .short('c')
+                .long("sector_count")
+                .default_value("512")
         )
         .arg(
             Arg::new("SECTOR_SIZE")
-                .help("The size of each sectors. (512)")
+                .help("The size of each sectors. (Byte)")
+                .short('s')
+                .long("sector_size")
+                .default_value("512")
         )
         .arg(
             Arg::new("FILESYSTEM")
-                .help("The filesystem of the generated image. (Fat)")
+                .help("The filesystem of the generated image. [Fat]")
+                .short('f')
+                .long("filesystem")
+                .default_value("Fat")
         )
 }
 
 pub fn process_image_create(matches: &ArgMatches) {
     let from_folder = matches.get_one::<String>("FROM_FOLDER").unwrap();
     let to_file = matches.get_one::<String>("TO_FILE").unwrap();
-    let default_sector = String::from("512");
-    let sector_size = matches.get_one::<String>("SECTOR_SIZE")
-        .unwrap_or(&default_sector);
-    let sector_count = matches.get_one::<String>("SECTOR_COUNT")
-        .unwrap_or(&default_sector);
-    let default_filesystem_name = String::from("Fat");
-    let filesystem_name = matches.get_one::<String>("FILESYSTEM")
-        .unwrap_or(&default_filesystem_name);
+    let sector_size = matches.get_one::<String>("SECTOR_SIZE").unwrap();
+    let sector_count = matches.get_one::<String>("SECTOR_COUNT").unwrap();
+    let filesystem_name = matches.get_one::<String>("FILESYSTEM").unwrap();
 
     println!("Creating one image from source folder: \"{}\".", from_folder);
     println!("The count of the sectors: {}.", sector_count);
@@ -55,7 +59,13 @@ pub fn process_image_create(matches: &ArgMatches) {
     let filesystem = Filesystem::from_str(filesystem_name).unwrap();
     println!("The filesystem of the image: {}.", filesystem.as_str());
 
-    image_create(&from_folder.into(), &to_file.into(), sector_size, sector_count, filesystem);
+    image_create(
+        &from_folder.into(),
+        &to_file.into(),
+        sector_size,
+        sector_count,
+        filesystem,
+    );
     println!("Created image file: \"{}\".", to_file);
 }
 

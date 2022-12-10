@@ -23,6 +23,7 @@ pub fn fix_nested_cargo_env(cmd: &mut Command) {
 pub fn cargo_command(action: &str) -> Command {
     let mut command = Command::new("cargo");
     fix_nested_cargo_env(&mut command);
+    command.arg("+nightly");
     command.arg(action);
     command
 }
