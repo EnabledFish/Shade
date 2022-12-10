@@ -16,6 +16,9 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v2
 
+      - name: Install the nightly version of rust
+        run: rustup install nightly
+
       - name: Build Shade Helper
         run: cargo build --bin shade-helper
 
