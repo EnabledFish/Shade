@@ -19,6 +19,9 @@ jobs:
       - name: Install the nightly version of rust
         run: rustup install nightly
 
+      - name: Override the nightly version.
+        run: rustup override add nightly
+
       - name: Add component rust-src.
         run: rustup component add rust-src
 
