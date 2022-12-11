@@ -19,6 +19,12 @@ jobs:
       - name: Install the nightly version of rust
         run: rustup install nightly
 
+      - name: Add component rust-src.
+        run: rustup component add rust-src
+
+      - name: Add component llvm-tools-preview.
+        run: rustup component add llvm-tools-preview
+
       - name: Build Shade Helper
         run: cargo build --bin shade-helper
 
