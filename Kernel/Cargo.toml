@@ -1,0 +1,7 @@
+[package]
+name = "shade-kernel"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+shade-bootloader-interface = { path = "../Bootloader/Interface" }
