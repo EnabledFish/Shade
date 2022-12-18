@@ -6,15 +6,18 @@ use fs_extra::dir::CopyOptions;
 use crate::build::bootloader::{command_build_bootloader, process_build_bootloader};
 use crate::build::clear::{command_build_clear, process_build_clear};
 use crate::build::image::{command_build_image, process_build_image};
+use crate::build::kernel::{command_build_kernel, process_build_kernel};
 use crate::folder_project_root;
 
 pub mod bootloader;
 pub mod image;
 pub mod clear;
+pub mod kernel;
 
 pub fn command_build() -> Command {
     Command::new("build")
         .about("Build something like the bootloader from the source files.")
+        .subcommand_required(true)
         .subcommand(
             command_build_clear()
         )
@@ -23,6 +26,9 @@ pub fn command_build() -> Command {
         )
         .subcommand(
             command_build_bootloader()
+        )
+        .subcommand(
+            command_build_kernel()
         )
 }
 
@@ -33,6 +39,7 @@ pub fn process_build(matches: &ArgMatches) {
         "image" => process_build_image(subcommand_matches),
 
         "bootloader" => process_build_bootloader(subcommand_matches),
+        "kernel" => process_build_kernel(subcommand_matches),
         _ => unreachable!()
     }
 }

@@ -32,6 +32,7 @@ pub fn build_bootloader_uefi(target: Target) {
     command.args(["--bin", "shade-bootloader-uefi"]);
     command.args(["--target", target_fullname.as_str()]);
     command.arg("-Zbuild-std=core,alloc");
+    command.arg("--release");
     command.arg("-Zunstable-options");
     command.args(["--out-dir", folder_build_object().to_str().unwrap()]);
     command.current_dir(folder_project_root());

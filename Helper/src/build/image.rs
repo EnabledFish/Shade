@@ -11,7 +11,7 @@ pub fn command_build_image() -> Command {
                 .help("The count of sectors.")
                 .short('c')
                 .long("sector_count")
-                .default_value("512")
+                .default_value("2048")
         )
         .arg(
             Arg::new("SECTOR_SIZE")

@@ -6,3 +6,7 @@ edition = "2021"
 [dependencies]
 uefi = { version = "0.18", features = ["alloc"] }
 uefi-services = "0.15"
+
+goblin = { version = "0.6", default-features = false, features = ["elf32", "elf64", "endian_fd"] }
+
+shade-bootloader-interface = { path = "../Interface" }

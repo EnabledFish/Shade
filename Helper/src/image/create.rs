@@ -24,7 +24,7 @@ pub fn command_image_create() -> Command {
                 .help("The count of sectors.")
                 .short('c')
                 .long("sector_count")
-                .default_value("512")
+                .default_value("4096")
         )
         .arg(
             Arg::new("SECTOR_SIZE")
