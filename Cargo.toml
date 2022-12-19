@@ -1,9 +1,0 @@
-[workspace]
-members = [
-    "Helper",
-
-    "Bootloader/Interface",
-    "Bootloader/Uefi",
-
-    "Kernel",
-]

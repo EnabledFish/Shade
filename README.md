@@ -1,6 +1,6 @@
 # 🌃 Shade
 
-Shade is an operating system written for education.
+Shade is an operating system written for the communication.
 
 # ❤️ Thanks
 
