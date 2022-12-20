@@ -39,6 +39,7 @@ pub fn folder_build_base() -> PathBuf {
                 depth: 0,
             },
         ).unwrap();
+        println!("[ShadeHelper] One folder has been built: {}", path.to_str().unwrap());
     }
     path
 }
