@@ -7,5 +7,6 @@ mod folders;
 mod configs;
 mod cargo;
 mod emulators;
+mod targets;
 
 fn main() {}

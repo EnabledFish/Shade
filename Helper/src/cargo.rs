@@ -10,7 +10,7 @@ fn cargo_sanitized_path(orig_path: OsString) -> OsString {
             .any(|component| component.as_os_str() == ".rustup")
     });
 
-    env::join_paths(sanitized_paths).expect("Invalid PATH.")
+    env::join_paths(sanitized_paths).unwrap()
 }
 
 fn cargo_fix_env(cmd: &mut Command) {
