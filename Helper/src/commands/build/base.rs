@@ -8,22 +8,22 @@ pub fn command_build_base() -> Command {
         .about("Build the image source base.")
         .arg(
             Arg::new("REMOVE")
-            .short('f')
-            .long("remove")
-            .help("Remove the old image source base.")
-            .num_args(0..0)
+                .short('r')
+                .long("remove")
+                .help("Remove the old image source base. [True/False]")
+                .default_value("false")
         )
 }
 
 pub fn process_build_base(matches: &ArgMatches) {
     let build_base = folder_build().join("Base");
     if build_base.exists() {
-        if matches.contains_id("REMOVE") {
+        if matches.get_one::<String>("REMOVE").unwrap() == "true" {
             remove_dir_all(&build_base).unwrap();
-            println!("[ShadeHelper] One folder has been removed: {}", build_base.to_str().unwrap());
+            println!("[ShadeHelper] One folder has been removed: \"{}\".", build_base.to_str().unwrap());
             folder_build_base();
         } else {
-            panic!("The image source base is already built, use -r or --remove to remove it and build then.");
+            println!("[ShadeHelper] The image source base is already built, using '-r true' or '--remove true' to remove it and build then.");
         }
     } else {
         folder_build_base();

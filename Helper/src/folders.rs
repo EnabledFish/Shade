@@ -17,7 +17,8 @@ pub fn folder_bootloaders() -> PathBuf {
 pub fn folder_build() -> PathBuf {
     let path = folder_root().join("Build");
     if !path.exists() {
-        fs_err::create_dir(&path).unwrap()
+        fs_err::create_dir(&path).unwrap();
+        println!("[ShadeHelper] One folder has been created: \"{}\".", path.to_str().unwrap());
     }
     path
 }
@@ -39,7 +40,7 @@ pub fn folder_build_base() -> PathBuf {
                 depth: 0,
             },
         ).unwrap();
-        println!("[ShadeHelper] One folder has been built: {}", path.to_str().unwrap());
+        println!("[ShadeHelper] One folder has been built: \"{}\".", path.to_str().unwrap());
     }
     path
 }

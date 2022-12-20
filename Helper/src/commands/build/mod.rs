@@ -1,7 +1,7 @@
 use clap::{ArgMatches, Command};
 use crate::commands::build::base::{command_build_base, process_build_base};
 use crate::commands::build::clear::{command_build_clear, process_build_clear};
-use crate::commands::build::image::command_build_image;
+use crate::commands::build::image::{command_build_image, process_build_image};
 
 pub mod clear;
 pub mod bootloader;
@@ -29,7 +29,7 @@ pub fn command_build() -> Command {
 pub fn process_build(matches: &ArgMatches) {
     let (subcommand_name, subcommand_matches) = matches.subcommand().unwrap();
     match subcommand_name {
-        "image" => todo!(),// process_build_image()
+        "image" => process_build_image(subcommand_matches),
         "base" => process_build_base(subcommand_matches),
         "clear" => process_build_clear(subcommand_matches),
         _ => unreachable!()
