@@ -1,0 +1,14 @@
+[package]
+name = "shade-helper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Commandline Interface
+clap = "4.0"
+
+# Image
+fatfs = { git = "https://github.com/rafalh/rust-fatfs.git", rev = "87fc1ed5074a32b4e0344fcdde77359ef9e75432" }
+fs-err = "2.9"
+fs_extra = "1.2"
+mbrman = { git = "https://github.com/cecton/mbrman.git", rev = "78565860e55c272488d94480e72a4e2cd159ad8e" }
