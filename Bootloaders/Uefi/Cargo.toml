@@ -6,3 +6,6 @@ edition = "2021"
 [dependencies]
 uefi = { version = "0.18", features = ["alloc"] }
 uefi-services = "0.15"
+
+[dependencies.shade-bootloader-interfaces]
+path = "../Interfaces"

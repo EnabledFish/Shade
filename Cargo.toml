@@ -4,6 +4,7 @@ members = [
     "Helper",
 
     # Shade Bootloader
+    "Bootloaders/Interfaces",
     "Bootloaders/Uefi",
 
     # Shade Kernel
