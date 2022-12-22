@@ -1,7 +1,9 @@
 use clap::{ArgMatches, Command};
 use crate::commands::build::base::{command_build_base, process_build_base};
+use crate::commands::build::bootloader::{command_build_bootloader, process_build_bootloader};
 use crate::commands::build::clear::{command_build_clear, process_build_clear};
 use crate::commands::build::image::{command_build_image, process_build_image};
+use crate::commands::build::kernel::{command_build_kernel, process_build_kernel};
 
 pub mod clear;
 pub mod bootloader;
@@ -24,6 +26,12 @@ pub fn command_build() -> Command {
         .subcommand(
         command_build_clear()
         )
+        .subcommand(
+            command_build_bootloader()
+        )
+        .subcommand(
+            command_build_kernel()
+        )
 }
 
 pub fn process_build(matches: &ArgMatches) {
@@ -32,6 +40,8 @@ pub fn process_build(matches: &ArgMatches) {
         "image" => process_build_image(subcommand_matches),
         "base" => process_build_base(subcommand_matches),
         "clear" => process_build_clear(subcommand_matches),
+        "bootloader" => process_build_bootloader(subcommand_matches),
+        "kernel" => process_build_kernel(subcommand_matches),
         _ => unreachable!()
     }
 }

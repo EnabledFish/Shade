@@ -1,4 +1,11 @@
 [workspace]
 members = [
+    # Shade Helper
     "Helper",
+
+    # Shade Bootloader
+    "Bootloaders/Uefi",
+
+    # Shade Kernel
+    "Kernel"
 ]

@@ -1,6 +1,7 @@
 use std::env;
 use std::ffi::OsString;
 use std::process::Command;
+use crate::folders::folder_root;
 
 fn cargo_sanitized_path(orig_path: OsString) -> OsString {
     let paths = env::split_paths(&orig_path);
@@ -25,5 +26,6 @@ pub fn cargo_command(action: &str) -> Command {
     cargo_fix_env(&mut command);
     command.arg("+nightly");
     command.arg(action);
+    command.current_dir(folder_root());
     command
 }

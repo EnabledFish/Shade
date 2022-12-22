@@ -38,9 +38,9 @@ pub fn process_build_image(matches: &ArgMatches) {
     let from_folder = folder_build_base();
     let to_file = folder_build().join("Image.img");
 
-    println!("[ShadeHelper] Creating one image from source folder: \"{}\".", from_folder.to_str().unwrap());
-    println!("[ShadeHelper] The count of the sectors: {}.", sector_count);
-    println!("[ShadeHelper] The size of each sectors: {}.", sector_size);
+    println!("[ShadeHelper] Creating one image from the source folder: \"{}\".", from_folder.to_str().unwrap());
+    println!("[ShadeHelper] The count of the sectors: {} Sectors.", sector_count);
+    println!("[ShadeHelper] The size of each sectors: {} Bytes.", sector_size);
     let sector_count = usize::from_str(sector_count.as_str()).unwrap();
     let sector_size = usize::from_str(sector_size.as_str()).unwrap();
     let total_size_kb = sector_count * sector_size / 1024;
@@ -50,7 +50,7 @@ pub fn process_build_image(matches: &ArgMatches) {
     } else {
         total_size_string = format!("{} MB", total_size_kb / 1024);
     }
-    println!("[ShadeHelper] The size of the total image: {} KB.", total_size_string);
+    println!("[ShadeHelper] The size of the total image: {}.", total_size_string);
 
     let filesystem = Filesystem::from_str(filesystem_name).unwrap();
     println!("[ShadeHelper] The filesystem of the image: {}.", filesystem.as_str());
