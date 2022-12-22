@@ -1,22 +1,30 @@
 use std::ffi::OsString;
 use std::str::FromStr;
 use clap::{ArgMatches, Command};
+use crate::commands::batch::{command_batch, process_batch};
 use crate::commands::build::{command_build, process_build};
 
 pub mod build;
 pub mod run;
+pub mod batch;
 
 pub fn command_main() -> Command {
     Command::new("ShadeHelper")
-        .about("Shade Helper is helper for operating system engineering, which is created for Shade System originally.")
+        .about("Shade Helper is helper for operating system engineering, which is created for Shade originally.")
         .subcommand_required(true)
-        .subcommand(command_build())
+        .subcommand(
+            command_build()
+        )
+        .subcommand(
+            command_batch()
+        )
 }
 
 pub fn process_main(matches: &ArgMatches) {
     let (subcommand_name, subcommand_matches) = matches.subcommand().unwrap();
     match subcommand_name {
         "build" => process_build(subcommand_matches),
+        "batch" => process_batch(subcommand_matches),
         _ => unreachable!()
     }
 }

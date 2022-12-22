@@ -37,6 +37,8 @@ pub fn process_build_bootloader_uefi(matches: &ArgMatches) {
     println!("[ShadeHelper] If the debug mode is enabled: {}.", debug);
 
     build_bootloader_uefi(target, debug);
+
+    println!("[ShadeHelper] Built one project: Shade-Bootloader-Uefi.");
 }
 
 pub fn build_bootloader_uefi(target: Target, debug: bool) {

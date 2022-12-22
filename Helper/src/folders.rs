@@ -54,12 +54,16 @@ pub fn folder_root() -> PathBuf {
     ).unwrap()
 }
 
+pub fn file_root(name: &str) -> PathBuf {
+    folder_root().join(name)
+}
+
 pub fn folder_base() -> PathBuf {
-    folder_root().join("Base")
+    file_root("Base")
 }
 
 pub fn folder_bootloaders() -> PathBuf {
-    folder_root().join("Bootloaders")
+    file_root("Bootloaders")
 }
 
 pub fn folder_bootloaders_uefi() -> PathBuf {
@@ -71,7 +75,7 @@ pub fn folder_bootloaders_uefi_base() -> PathBuf {
 }
 
 pub fn folder_build() -> PathBuf {
-    create_folder_if_not_exist(folder_root().join("Build"))
+    create_folder_if_not_exist(file_root("Build"))
 }
 
 pub fn folder_build_base() -> PathBuf {
@@ -118,22 +122,22 @@ pub fn file_build_objects(name: &str) -> PathBuf {
 }
 
 pub fn folder_drivers() -> PathBuf {
-    folder_root().join("Drivers")
+    file_root("Drivers")
 }
 
 pub fn folder_helper() -> PathBuf {
-    folder_root().join("Helper")
+    file_root("Helper")
 }
 
 pub fn folder_kernel() -> PathBuf {
-    folder_root().join("Kernel")
+    file_root("Kernel")
 }
 
 pub fn folder_libraries() -> PathBuf {
-    folder_root().join("Libraries")
+    file_root("Libraries")
 }
 
 pub fn folder_userlands() -> PathBuf {
-    folder_root().join("Userlands")
+    file_root("Userlands")
 }
 

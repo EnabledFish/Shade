@@ -7,7 +7,6 @@
 extern crate alloc;
 
 use uefi::prelude::*;
-use uefi::proto::console::gop::GraphicsOutput;
 use uefi_services::*;
 
 static mut SYSTEM_TABLE: Option<SystemTable<Boot>> = None;
