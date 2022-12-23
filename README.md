@@ -32,7 +32,7 @@ rustup install nightly
 rustup override add nightly
 ```
 
-## Run Batch File
+### Running Batch File
 
 Shade provides a cross-platform building tool which you can use to construct the image of shade easily.
 
