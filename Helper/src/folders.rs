@@ -78,10 +78,14 @@ pub fn folder_build() -> PathBuf {
     create_folder_if_not_exist(file_root("Build"))
 }
 
+pub fn file_build(name: &str) -> PathBuf {
+    folder_build().join(name)
+}
+
 pub fn folder_build_base() -> PathBuf {
     copy_folder_if_not_exist(
         folder_base(),
-        folder_build().join("Base"),
+        file_build("Base"),
     )
 }
 
@@ -114,7 +118,7 @@ pub fn file_build_base_efi_boot_for_uefi(name: &str) -> PathBuf {
 }
 
 pub fn folder_build_objects() -> PathBuf {
-    create_folder_if_not_exist(folder_build().join("Objects"))
+    create_folder_if_not_exist(file_build("Objects"))
 }
 
 pub fn file_build_objects(name: &str) -> PathBuf {
@@ -135,6 +139,14 @@ pub fn folder_kernel() -> PathBuf {
 
 pub fn folder_libraries() -> PathBuf {
     file_root("Libraries")
+}
+
+pub fn folder_resources() -> PathBuf {
+    file_root("Resources")
+}
+
+pub fn file_resources(name: &str) -> PathBuf {
+    folder_resources().join(name)
 }
 
 pub fn folder_userlands() -> PathBuf {

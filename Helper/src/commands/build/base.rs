@@ -1,6 +1,7 @@
 use std::str::FromStr;
 use clap::{Arg, ArgMatches, Command};
 use fs_err::remove_dir_all;
+use crate::configs::DEFAULT_REMOVE_OLD_FILES;
 
 use crate::folders::{folder_build, folder_build_base};
 
@@ -12,7 +13,7 @@ pub fn command_build_base() -> Command {
                 .short('r')
                 .long("remove")
                 .help("Remove the old image source base. [True/False]")
-                .default_value("false")
+                .default_value(DEFAULT_REMOVE_OLD_FILES)
         )
 }
 

@@ -24,8 +24,8 @@ fn cargo_fix_env(cmd: &mut Command) {
 pub fn cargo_command(action: &str) -> Command {
     let mut command = Command::new("cargo");
     cargo_fix_env(&mut command);
-    command.arg("+nightly");
-    command.arg(action);
-    command.current_dir(folder_root());
+    command.arg("+nightly")
+        .arg(action)
+        .current_dir(folder_root());
     command
 }

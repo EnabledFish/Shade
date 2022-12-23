@@ -3,6 +3,7 @@ use std::str::FromStr;
 use clap::{ArgMatches, Command};
 use crate::commands::batch::{command_batch, process_batch};
 use crate::commands::build::{command_build, process_build};
+use crate::commands::run::{command_run, process_run};
 
 pub mod build;
 pub mod run;
@@ -16,6 +17,9 @@ pub fn command_main() -> Command {
             command_build()
         )
         .subcommand(
+            command_run()
+        )
+        .subcommand(
             command_batch()
         )
 }
@@ -24,6 +28,7 @@ pub fn process_main(matches: &ArgMatches) {
     let (subcommand_name, subcommand_matches) = matches.subcommand().unwrap();
     match subcommand_name {
         "build" => process_build(subcommand_matches),
+        "run" => process_run(subcommand_matches),
         "batch" => process_batch(subcommand_matches),
         _ => unreachable!()
     }

@@ -2,7 +2,7 @@ use std::str::FromStr;
 use clap::{Arg, ArgMatches, Command};
 use crate::configs::{DEFAULT_FILESYSTEM, DEFAULT_SECTOR_COUNT, DEFAULT_SECTOR_SIZE};
 use crate::filesystems::{Filesystem, filesystem_create_image_from_folder};
-use crate::folders::{folder_build, folder_build_base};
+use crate::folders::{file_build, folder_build_base};
 
 pub fn command_build_image() -> Command {
     Command::new("image")
@@ -36,7 +36,7 @@ pub fn process_build_image(matches: &ArgMatches) {
     let filesystem_name = matches.get_one::<String>("FILESYSTEM").unwrap();
 
     let from_folder = folder_build_base();
-    let to_file = folder_build().join("Image.img");
+    let to_file = file_build("Image.img");
 
     println!("[ShadeHelper] Creating one image from the source folder: \"{}\".", from_folder.to_str().unwrap());
     println!("[ShadeHelper] The count of the sectors: {} Sectors.", sector_count);

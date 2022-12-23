@@ -2,7 +2,6 @@
 
 use crate::commands::process_main_from_argv;
 
-mod tests;
 mod commands;
 mod filesystems;
 mod folders;

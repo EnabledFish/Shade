@@ -35,7 +35,7 @@ pub fn process_build_kernel(matches: &ArgMatches) {
         debug_name.to_lowercase().as_str()
     ).unwrap();
 
-    println!("[ShadeHelper] The target platform of the kernel: {}.", target.as_str());
+    println!("[ShadeHelper] The target platform of the kernel: {}.", target);
     println!("[ShadeHelper] If the debug mode is enabled: {}.", debug);
 
     build_kernel(target, debug);
@@ -44,7 +44,7 @@ pub fn process_build_kernel(matches: &ArgMatches) {
 }
 
 pub fn build_kernel(target: Target, debug: bool) {
-    let target_fullname = format!("{}-unknown-none", target.as_str());
+    let target_fullname = target.none_target_fullname();
     let mut command = cargo_command("build");
     command.args(["--bin", "shade-kernel"]);
     command.args(["--target", target_fullname.as_str()]);

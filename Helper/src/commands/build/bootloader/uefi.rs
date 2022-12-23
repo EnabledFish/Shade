@@ -33,7 +33,7 @@ pub fn process_build_bootloader_uefi(matches: &ArgMatches) {
         debug_name.to_lowercase().as_str()
     ).unwrap();
 
-    println!("[ShadeHelper] The target platform of the uefi bootloader: {}.", target.as_str());
+    println!("[ShadeHelper] The target platform of the uefi bootloader: {}.", target);
     println!("[ShadeHelper] If the debug mode is enabled: {}.", debug);
 
     build_bootloader_uefi(target, debug);
@@ -42,7 +42,7 @@ pub fn process_build_bootloader_uefi(matches: &ArgMatches) {
 }
 
 pub fn build_bootloader_uefi(target: Target, debug: bool) {
-    let target_fullname = format!("{}-unknown-uefi", target.as_str());
+    let target_fullname = target.uefi_target_fullname();
     let mut command = cargo_command("build");
     command.args(["--bin", "shade-bootloader-uefi"]);
     command.args(["--target", target_fullname.as_str()]);
@@ -55,6 +55,6 @@ pub fn build_bootloader_uefi(target: Target, debug: bool) {
     command.spawn().unwrap().wait().unwrap();
     fs_err::copy(
         file_build_objects("shade-bootloader-uefi.efi"),
-        file_build_base_efi_boot_for_uefi(target.as_uefi_boot_file_name()),
+        file_build_base_efi_boot_for_uefi(target.uefi_boot_file_name()),
     ).unwrap();
 }

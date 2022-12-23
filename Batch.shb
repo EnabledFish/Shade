@@ -3,4 +3,4 @@ build base
 build bootloader uefi
 build kernel
 build image
-# run qemu -o
+run qemu -o true
