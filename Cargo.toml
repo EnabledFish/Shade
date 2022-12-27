@@ -8,5 +8,8 @@ members = [
     "Bootloaders/Uefi",
 
     # Shade Kernel
-    "Kernel"
+    "Kernel",
+
+    # Shade Libraries
+    "Libraries/ShadeConfig",
 ]
