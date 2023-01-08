@@ -1,5 +1,0 @@
-[alias]
-x86_64 = "build --target x86_64-unknown-none"
-
-[unstable]
-build-std = ["core", "alloc"]

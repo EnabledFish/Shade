@@ -1,6 +1,0 @@
-build clear
-build base
-build bootloader uefi
-build kernel
-build image
-run qemu -o true
